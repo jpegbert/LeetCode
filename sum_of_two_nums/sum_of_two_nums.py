@@ -7,12 +7,16 @@
 给定 nums = [2, 7, 11, 15], target = 9
 因为 nums[0] + nums[1] = 2 + 7 = 9
 所以返回 [0, 1]
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/two-sum/
 """
 
 
 def two_sum(nums, target):
     """
     这种适用于数组是有序的
+    思路：双指针法，由于数组有序，第一个指针从前往后，第二个指针从后往前，分别对应从小到大和从大到小，当两个指针指向的数据相加等于target的时候，程序返回，当两个指针指向的数据相加之和小于target时，第一个指针右移，当两个指针指向的数据之和大于target时，第二个指针左移
     :param nums:
     :param target:
     :return:
@@ -63,7 +67,7 @@ def two_sum2(nums, target):
 
 def two_sum3(nums, target):
     """
-    暴力法的优化解法：遍历到一个数字后，不用再循环一次数组，在python中可以直接判断 (目标值 - 当前位置元素) 是否在数组中，丙求出位置
+    暴力法的优化解法：遍历到一个数字后，不用再循环一次数组，在python中可以直接判断 (目标值 - 当前位置元素) 是否在数组中，并求出位置
     :param nums:
     :param target:
     :return:
