@@ -46,30 +46,64 @@ def mergeTwoLists(l1, l2):
     elif l1 is None and l2 is not None:
         return l2
     else:
-        head = None
-        if l1.val <= l2.val:
-            head = l1
-            l1 = l1.next
-        else:
-            head = l2
-            l2 = l2.next
-        dummyHead = head
+        prehead = ListNode(-1, None)
+        prev = prehead
         while l1 and l2:
             if l1.val <= l2.val:
-                dummyHead.next = l1
-                dummyHead = l1
+                prev.next = l1
                 l1 = l1.next
             else:
-                dummyHead.next = l2
-                dummyHead = l2
+                prev.next = l2
                 l2 = l2.next
+            prev = prev.next
         if l1:
-            dummyHead.next = l1
+            prev.next = l1
         if l2:
-            dummyHead.next = l2
+            prev.next = l2
 
-    return head
+    return prehead.next
 
+
+def mergeTwoLists(l1, l2):
+    """
+    官方解法：递归
+    :param l1:
+    :param l2:
+    :return:
+    """
+    if l1 is None:
+        return l2
+    elif l2 is None:
+        return l1
+    elif l1.val < l2.val:
+        l1.next = mergeTwoLists(l1.next, l2)
+        return l1
+    else:
+        l2.next = mergeTwoLists(l1, l2.next)
+        return l2
+
+
+def mergeTwoLists(l1, l2):
+    """
+    官方解法
+    :param l1:
+    :param l2:
+    :return:
+    """
+    prehead = ListNode(-1)
+    prev = prehead
+    while l1 and l2:
+        if l1.val <= l2.val:
+            prev.next = l1
+            l1 = l1.next
+        else:
+            prev.next = l2
+            l2 = l2.next
+        prev = prev.next
+    # 合并后 l1 和 l2 最多只有一个还未被合并完，我们直接将链表末尾指向未合并完的链表即可
+    prev.next = l1 if l1 is not None else l2
+
+    return prehead.next
 
 
 def createList(data):
@@ -93,10 +127,10 @@ def printList(head):
 def main():
     l1 = [1, 2, 4]
     l2 = [1, 3, 4]
-    l1 = []
-    l2 = []
-    l1 = []
-    l2 = [0]
+    # l1 = []
+    # l2 = []
+    # l1 = []
+    # l2 = [0]
     l1 = createList(l1)
     l2 = createList(l2)
     # printList(l1)
@@ -104,7 +138,6 @@ def main():
     # printList(l2)
     res = mergeTwoLists(l1, l2)
     printList(res)
-
 
 
 if __name__ == '__main__':
