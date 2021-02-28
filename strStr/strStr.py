@@ -55,7 +55,7 @@ def strStr1(haystack, needle):
     return -1
 
 
-def strStr(haystack, needle):
+def strStr2(haystack, needle):
     """
     方法3：官方解法，双指针 - 线性时间复杂度
     :param haystack:
