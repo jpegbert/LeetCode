@@ -59,6 +59,7 @@ def searchRange(nums, target):
 
 def searchRange1(nums, target):
     leftIdx = binarySearch(nums, target, True)
+    # binarySearch(nums, target, False) 找不到target，只能找到比target大的第一个元素的位置
     rightIdx = binarySearch(nums, target, False) - 1
     if leftIdx <= rightIdx and rightIdx < len(nums) and nums[leftIdx] == target and nums[rightIdx] == target:
         return [leftIdx, rightIdx]
@@ -84,12 +85,12 @@ def binarySearch(nums, target, lower):
 def main():
     nums = [5, 7, 7, 8, 8, 10]
     target = 8 # [3, 4]
-    nums = [5, 7, 7, 8, 8, 10]
-    target = 6  # [-1, -1]
-    nums = []
-    target = 0 # [-1, -1]
-    nums = [2, 2]
-    target = 3  # [-1, -1
+    # nums = [5, 7, 7, 8, 8, 10]
+    # target = 6  # [-1, -1]
+    # nums = []
+    # target = 0 # [-1, -1]
+    # nums = [2, 2]
+    # target = 3  # [-1, -1
     res = searchRange1(nums, target)
     print(res)
 
