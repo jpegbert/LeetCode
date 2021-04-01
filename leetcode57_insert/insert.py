@@ -64,11 +64,40 @@ def insert(intervals, newInterval):
     return ans
 
 
+def insert1(intervals, newInterval):
+    """
+    在官方解法的基础上：调换if else的顺序，还是可以的，已经AC
+    :type intervals: List[List[int]]
+    :type newInterval: List[int]
+    :rtype: List[List[int]]
+    """
+    left, right = newInterval
+    placed = False
+    ans = list()
+    for li, ri in intervals:
+        if ri < left:# 在插入区间的左侧且无交集
+            ans.append([li, ri])
+        elif li > right:
+            # 在插入区间的右侧且无交集
+            if not placed:
+                ans.append([left, right])
+                placed = True
+            ans.append([li, ri])
+        else:
+            # 与插入区间有交集，计算它们的并集
+            left = min(left, li)
+            right = max(right, ri)
+
+    if not placed:
+        ans.append([left, right])
+    return ans
+
+
 def main():
     intervals = [[1, 3], [6, 9]]
     newInterval = [2, 5] # [[1, 5], [6, 9]]
-    intervals = [[1, 2], [3, 5], [6, 7], [8, 10], [12, 16]]
-    newInterval = [4, 8]
+    # intervals = [[1, 2], [3, 5], [6, 7], [8, 10], [12, 16]]
+    # newInterval = [4, 8]
     res = insert(intervals, newInterval)
     print(res)
 
